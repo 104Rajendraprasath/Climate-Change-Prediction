@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 Climate Change Prediction</h1>
+
+        <form id="predictForm" class="form">
+            <div class="form-group">
+                <label for="model_name">Select Model</label>
+                <select id="model_name">
+                    <option value="lstm_model">LSTM</option>
+                    <option value="rnn_model">RNN</option>
+                    <option value="gru_model">GRU</option>
+                    <option value="ann_model">ANN</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="temperature">Temperature</label>
+                <input type="text" id="temperature" placeholder="Enter temperature" required>
+            </div>
+
+            <div class="form-group">
+                <label for="co2">CO2</label>
+                <input type="text" id="co2" placeholder="Enter CO2 level" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sea_level">Sea Level</label>
+                <input type="text" id="sea_level" placeholder="Enter sea level" required>
+            </div>
+
+            <div class="form-group">
+                <label for="precipitation">Precipitation</label>
+                <input type="text" id="precipitation" placeholder="Enter precipitation" required>
+            </div>
+
+            <div class="form-group">
+                <label for="humidity">Humidity</label>
+                <input type="text" id="humidity" placeholder="Enter humidity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="wind_speed">Wind Speed</label>
+                <input type="text" id="wind_speed" placeholder="Enter wind speed" required>
+            </div>
+
+            <button type="submit" class="btn">Predict 🌡️</button>
+        </form>
+
+        <div id="result" class="result"></div>
+        {% if prediction %}
+        <div class="result">
+            <strong>Prediction ({{ model }}):</strong> {{ prediction }}
+        </div>
+        {% elif error %}
+        <div class="error">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+document.getElementById('predictForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const model_name = document.getElementById('model_name').value;
+    const features = [
+        parseFloat(document.getElementById('temperature').value),
+        parseFloat(document.getElementById('co2').value),
+        parseFloat(document.getElementById('sea_level').value),
+        parseFloat(document.getElementById('precipitation').value),
+        parseFloat(document.getElementById('humidity').value),
+        parseFloat(document.getElementById('wind_speed').value)
+    ];
+
+    if (features.some(isNaN)) {
+        alert("Please enter valid numbers for all fields.");
+        return;
+    }
+
+    try {
+        const res = await fetch('/predict', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({model_name, features})
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            // Format predictions nicely
+            let preds = data.predictions;
+            let formatted = "";
+
+            // If prediction is 2D array → take first row or flatten
+            if (Array.isArray(preds) && Array.isArray(preds[0])) {
+                preds = preds.flat();
+            }
+
+            // Add labels for each value
+            const labels = ["Temperature", "CO₂ Level", "Sea Level", "Precipitation", "Humidity", "Wind Speed"];
+
+            preds.forEach((val, i) => {
+                formatted += `<p><strong>${labels[i] || 'Value ' + (i+1)}:</strong> ${val.toFixed(2)}</p>`;
+            });
+
+            // Optional: Simple interpretation (example)
+            let status = "";
+            if (preds[0] > 30) status = "Hot Weather";
+            else if (preds[0] < 15) status = "Cold Weather";
+            else status = "Moderate Weather";
+
+            document.getElementById('result').innerHTML = 
+                `<div class="success">
+                    <h3>Prediction from ${data.model}:</h3>
+                    ${formatted}
+                    <p><em>🌍 Climate status: ${status}</em></p>
+                </div>`;
+        } else {
+            document.getElementById('result').innerHTML = 
+                `<div class="error">
+                    <strong>Error:</strong> ${data.error}
+                </div>`;
+        }
+    } catch (err) {
+        document.getElementById('result').innerHTML = 
+            `<div class="error"><strong>Error:</strong> ${err}</div>`;
+    }
+});
+</script>
+
+</body>
+</html>
