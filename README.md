@@ -40,7 +40,7 @@ Performs Feature Selection → selects important features to reduce dimensionali
 
 📂 Files
 
-Jupyter Notebook with all steps: Week2_ClimateRisk_EDA.ipynb
+Jupyter Notebook with all steps: Climate_Change_Prediction.ipynb
 
 Dataset: climate_change_data.csv
 
@@ -48,11 +48,11 @@ README.md: Project documentation
 
 🔗 GitHub Link
 
-[Insert your GitHub repo link here]
+(https://github.com/104Rajendraprasath/Climate-Change-Prediction.git)
 
 🚀 Next Steps
 
-Apply machine learning models (ANN, LSTM, GRU) to predict climate risk outcomes.
+Apply machine learning models (ANN, LSTM, GRU,RNN,Linear Regression) to predict climate risk outcomes.
 
 Build a web application (Flask + frontend) to deploy the models.
 
