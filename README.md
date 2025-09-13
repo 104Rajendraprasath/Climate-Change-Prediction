@@ -1,122 +1,64 @@
-🌍 Climate Change Prediction App
+🌍 Climate Change Data Analysis
 
-This project is a machine learning & deep learning based web application that predicts key climate parameters and provides a human-readable weather summary.
-It uses ANN, LSTM, GRU, and RNN models trained on climate datasets to forecast temperature, CO₂ levels, sea level, precipitation, humidity, and wind speed.
+This project explores climate change data using Python and Pandas.
+The dataset is stored in climate_change_data.csv.
+We perform data exploration, preprocessing, and feature selection to prepare the dataset for further analysis or modeling.
 
-📑 Features
+📦 Requirements
 
-Input climate indicators through a simple web form.
+Python 3.x
 
-Dynamically select ML/DL model (ANN, LSTM, GRU, RNN).
+Pandas
 
-Predicts future values of climate parameters.
+NumPy
 
-Converts raw predictions into human-readable summaries (e.g. “Hot, Light Rain, Breezy”).
+Matplotlib / Seaborn (for visualizations)
 
-Interactive frontend built with HTML, CSS, JavaScript.
+Scikit-learn (for preprocessing & feature selection)
 
-Backend powered by Python Flask and TensorFlow/Keras models.
+Install dependencies:
 
-🛠️ Tools and Technologies Used
+pip install pandas numpy matplotlib seaborn scikit-learn
 
-Programming Language: Python
+📝 What the Code Does
 
-Backend Framework: Flask
+Reads the dataset into a Pandas DataFrame.
 
-Frontend: HTML, CSS, JavaScript (Fetch API)
+Displays the dataset preview (first few rows).
 
-Data Handling & Analysis: Pandas, NumPy
+Shows dataset info → column names, datatypes, memory usage.
 
-Visualization: Matplotlib, Seaborn, Plotly
+Generates descriptive statistics → mean, median, std, min, max.
 
-Machine Learning / Deep Learning: Scikit-learn, TensorFlow / Keras
+Checks for missing values → helps identify columns needing cleaning.
 
-Models Implemented: ANN, LSTM, GRU, RNN
+Performs Exploratory Data Analysis (EDA) → visualizes distributions, correlations, and patterns.
 
-Data Sources: NASA GISTEMP, NOAA Climate Data, Kaggle datasets
+Performs Data Transformation → imputes missing values, scales numerical features, encodes categorical variables.
 
-Preprocessing: Missing value handling, normalization, time-series formatting
+Performs Feature Selection → selects important features to reduce dimensionality and improve modeling.
 
-Evaluation Metrics: RMSE, MAE
+📂 Files
 
-Deployment: Localhost (can be extended to Heroku/AWS/Azure)
+Jupyter Notebook with all steps: Week2_ClimateRisk_EDA.ipynb
 
-📂 Project Structure
-├── app.py                  # Flask backend
-├── templates/
-│   └── index.html          # Frontend HTML template
-├── static/
-│   └── style.css           # Custom CSS styles
-├── models/
-│   ├── ann_model.h5
-│   ├── lstm_model.h5
-│   ├── gru_model.h5
-│   └── rnn_model.h5
-├── climate_change_data.csv # (optional) dataset
-└── README.md
+Dataset: climate_change_data.csv
 
-🚀 Getting Started
-1. Clone the repository
-git clone https://github.com/yourusername/ClimateChangePredictionApp.git
-cd ClimateChangePredictionApp
-
-2. Install dependencies
-pip install flask numpy pandas tensorflow scikit-learn matplotlib seaborn
-
-3. Add your models
-
-Place your trained models (ANN, LSTM, GRU, RNN) in the models directory as .h5 files.
-
-4. Run the Flask app
-python app.py
-
-
-The app runs at http://127.0.0.1:5000/
-.
-Open this in your browser.
-
-📝 How It Works
-
-User enters climate features (Temperature, CO₂, Sea Level, Precipitation, Humidity, Wind Speed).
-
-User selects which model to use (ANN/LSTM/GRU/RNN).
-
-Backend loads the selected model dynamically and predicts outputs.
-
-Predictions are converted into a readable weather summary.
-
-Frontend displays both raw predictions and the summary.
-
-📊 Model Training (Optional)
-
-Use Jupyter Notebooks to train models on datasets such as NASA GISTEMP or Kaggle Climate datasets.
-
-Preprocess the data (handle missing values, normalize, format for time series).
-
-Split into training and testing sets.
-
-Evaluate models with RMSE or MAE.
-
-Save models as .h5 and put them in the models/ folder.
-
-🖼️ Screenshots
-
-(Include screenshots of your web app showing the form and predictions)
-
-📝 Future Scope
-
-Integrate real-time IoT sensor feeds.
-
-Deploy on cloud platforms like AWS, Azure, or Heroku.
-
-Add a database to store historical predictions.
-
-Implement NLP to generate full weather reports.
+README.md: Project documentation
 
 🔗 GitHub Link
 
 [Insert your GitHub repo link here]
 
-📜 License
+🚀 Next Steps
 
-This project is licensed under the MIT License — see the LICENSE file for details.
+Apply machine learning models (ANN, LSTM, GRU) to predict climate risk outcomes.
+
+Build a web application (Flask + frontend) to deploy the models.
+
+Add visualization dashboards for trends and forecasts.
+
+📝 Conclusion
+
+This project provides a solid foundation for climate data analysis.
+By cleaning and transforming the dataset and selecting the most relevant features, we can move forward to build robust predictive models for climate change risk assessment.
